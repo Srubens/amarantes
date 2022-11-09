@@ -91,6 +91,10 @@ const salvar = async(e) =>{
         })
         return false;
     }else{
+      Swal.fire({
+        icon:'success',
+        html:'Cadastro realizado com sucesso'
+      })
       const response = await fetch('/api/save', {
         method:'POST',
         body:JSON.stringify(form)
@@ -98,10 +102,7 @@ const salvar = async(e) =>{
       const data = await response.json()
       setSucess(true)
       setRetorno(data)
-      Swal.fire({
-        icon:'success',
-        html:'Cadastro realizado com sucesso'
-      })
+      
       form.nome='',
       form.sobrenome='',
       form.cpf='',
