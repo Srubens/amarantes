@@ -71,11 +71,11 @@ const salvar = async(e) =>{
       body:JSON.stringify(form)
     })
     const data = await response.json()
-    Swal.fire({
-      icon:'success',
-      html:'Cadastro realizado com sucesso'
-    })
-    setSucess(true)
+    setSucess(true, 
+      Swal.fire({
+        icon:'success',
+        html:'Cadastro realizado com sucesso'
+      }))
     setRetorno(data)
     form.nome='',
     form.sobrenome='',
