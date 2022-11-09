@@ -31,6 +31,7 @@ export default async(req, res) =>{
            nome:data.nome,
            sobrenome:data.sobrenome,
            cpf:data.cpf,
+           email:data.email,
            ddd:data.ddd,
            telefone:data.telefone,
            nascimento:data.nascimento,

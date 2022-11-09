@@ -28,6 +28,9 @@ const Home = () => {
     uf:''
   })
 
+  const nome = form.nome
+  const email = form.email
+
   const checkCEP = (e) =>{
     const cep = e?.target.value.replace(/\D/g,'')
     // console.log(cep)
@@ -66,31 +69,56 @@ const onSubmit = (e) =>{
 const salvar = async(e) =>{
   e.preventDefault()
   try{
-    const response = await fetch('/api/save', {
-      method:'POST',
-      body:JSON.stringify(form)
-    })
-    const data = await response.json()
-    setSucess(true)
-    setRetorno(data)
-    Swal.fire({
-      icon:'success',
-      html:'Cadastro realizado com sucesso'
-    })
-    form.nome='',
-    form.sobrenome='',
-    form.cpf='',
-    form.email='',
-    form.ddd='',
-    form.telefone='',
-    form.nascimento='',
-    form.cep='',
-    form.logradouro='',
-    form.numero='',
-    form.bairro='',
-    form.localidade='',
-    form.uf=''
-    console.log(data)
+
+    if(!form.nome && form.nome === ''){
+      console.log('Erro')
+      Swal.fire({
+          icon:'error',
+          title:'Erro ao cadastrar',
+          html:`Para cadastrar preencha todos os campos!`,
+          confirmButtonText:"Voltar",
+          confirmButtonColor:"#ff1a1a"
+      })
+      return false;
+      }
+
+      if(!email && email === ''){
+        console.log('Erro')
+        Swal.fire({
+            icon:'error',
+            title:'Erro ao cadastrar',
+            html:`Para cadastrar preencha todos os campos!`
+        })
+        return false;
+    }else{
+      const response = await fetch('/api/save', {
+        method:'POST',
+        body:JSON.stringify(form)
+      })
+      const data = await response.json()
+      setSucess(true)
+      setRetorno(data)
+      Swal.fire({
+        icon:'success',
+        html:'Cadastro realizado com sucesso'
+      })
+      form.nome='',
+      form.sobrenome='',
+      form.cpf='',
+      form.email='',
+      form.ddd='',
+      form.telefone='',
+      form.nascimento='',
+      form.cep='',
+      form.logradouro='',
+      form.numero='',
+      form.bairro='',
+      form.localidade='',
+      form.uf=''
+      console.log(data)
+    }
+
+    
   }catch(err){
     console.log('Error: ', err)
   }
